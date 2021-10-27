@@ -7,6 +7,20 @@ a {
   color: #00B7FF;
 }
 
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 36px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10%;
+  padding-right: 10%;
+  overflow: scroll;
+  max-height: calc(100vh - 56px);
+}
+
 .content-box {
   margin-top: 10px;
   margin-bottom: 10px;
