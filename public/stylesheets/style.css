@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+.content-box {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #609fd0;
+  border: #609fd0;
+  color: white;
+}
+
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #3479b0;
+}

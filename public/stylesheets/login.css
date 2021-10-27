@@ -1,0 +1,43 @@
+p {
+  font-size: 22px;
+  margin-top: 15px;
+}
+
+img {
+  width: 20%;
+  padding-bottom: 30px;
+}
+
+.btn {
+  width: 300px;
+  margin-top: 20px;
+}
+
+.form-control {
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#content-box {
+  text-align: center;
+}
+
+.footer-text {
+  margin-top: 10px;
+}
+
+.alert-danger {
+  text-align: center;
+  height: 40px;
+  padding: 5px;
+  display: none;
+  font-size: 20px;
+}
