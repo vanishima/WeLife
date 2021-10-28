@@ -1,4 +1,70 @@
-.general {
-  border-width: 0 px;
-  /*border-color: black;*/
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 200px;
+  top: 0;
+  left: 0;
+  margin-right: 150px;
+}
+
+.logo_name {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: black;
+  width: 100px;
+}
+
+.nav_btn {
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+  margin-bottom: 20px;
+  margin-top: 80px;
+}
+
+.nav_btn:hover {
+  background-color: #ddd;
+}
+
+i {
+  transform: scale(2, 2);
+  -ms-transform: scale(2, 2); /* IE 9 */
+  -moz-transform: scale(2, 2); /* Firefox */
+  -webkit-transform: scale(2, 2); /* Safari and Chrome */
+  -o-transform: scale(2, 2); /* Opera */
+}
+
+.col-md {
+  margin-bottom: 50px;
+}
+
+body {
+  background: #ddd;
+}
+
+.row {
+  margin-left: 100px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.card {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 15px;
+  border: 5px solid #000;
+  margin-right: 30px;
+}
+
+.card img {
+  height: 200px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  width: 100%;
+}
+
+.card:hover {
+  border-color: #fff;
+  transition: 0.3s;
 }
