@@ -1,8 +1,13 @@
+body {
+  background: #ddd;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
 .sidebar {
   position: fixed;
   height: 100%;
   width: 200px;
-  top: 0;
+  top: 10px;
   left: 0;
   margin-right: 150px;
 }
@@ -26,6 +31,7 @@
 }
 
 i {
+  padding-top: 10px;
   transform: scale(2, 2);
   -ms-transform: scale(2, 2); /* IE 9 */
   -moz-transform: scale(2, 2); /* Firefox */
@@ -54,10 +60,6 @@ i {
 
 .col-md {
   margin-bottom: 50px;
-}
-
-body {
-  background: #ddd;
 }
 
 .row {
