@@ -1,57 +1,6 @@
 const campus = document.querySelector("#moments");
 // const pop = document.querySelector("#popup");
 
-const pseudoDB = [
-  {
-    name: "Peter",
-    title: "Hello WeLife!",
-    content:
-      "Excited to join the WeLife! \
-    I would like to say hello to all of you in this great community!",
-    image: "/images/logo.png",
-    time: "2021\\10\\26",
-  },
-  {
-    name: "Xuejia",
-    title: "Just join!",
-    content: "Greetings! This is Xuejia. Glad \
-    to meet you all here.",
-    image: "/images/logo.png",
-    time: "2021\\10\\23",
-  },
-  {
-    name: "Anni",
-    title: "This is cool",
-    content: "Happy to join the community~",
-    image: "/images/logo.png",
-    time: "2021\\9\\4",
-  },
-  {
-    name: "Anni",
-    title: "This is cool",
-    content: "Happy to join the community~",
-    image: "/images/logo.png",
-    time: "2021\\9\\4",
-  },
-  {
-    name: "Xuejia",
-    title: "Just join!",
-    content: "Greetings! This is Xuejia. Glad \
-    to meet you all here.",
-    image: "/images/logo.png",
-    time: "2021\\10\\23",
-  },
-  {
-    name: "Peter",
-    title: "Hello WeLife!",
-    content:
-      "Excited to join the WeLife! \
-    I would like to say hello to all of you in this great community!",
-    image: "/images/logo.png",
-    time: "2021\\10\\26",
-  },
-];
-
 function displayMoments(moments) {
   for (let m of moments) {
     const colmd = document.createElement("div");
@@ -110,8 +59,7 @@ async function reloadMoments() {
     if (!res.ok) {
       throw new Error("Response not ok " + res.status);
     }
-    // moments = await res.json();
-    moments = pseudoDB;
+    moments = await res.json();
   } catch (e) {
     campus.innerHTML = e.msg;
   }

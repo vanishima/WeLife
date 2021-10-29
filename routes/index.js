@@ -1,7 +1,10 @@
 let express = require("express");
 let router = express.Router();
 
-const momentDB = require("../db/momentDB.js");
+// const momentDB = require("../db/momentDB.js");
+const momentDB = require("../db/pseudoMomentDB.json");
+let credentials = require("../db/pseudoCredentialDB.json");
+const fs = require("fs");
 
 const bcrypt = require("bcrypt");
 // const saltRounds = 10;
@@ -21,61 +24,97 @@ function auth(req, res) {
 }
 
 /* User Sign-In Request. */
-router.post("/userSignIn", async (req, res) => {
+router.get("/userSignIn", async (req, res) => {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
-    // ask db to validate this user
-    const hash = await momentDB.getPassword(username);
-
-    // user does not exist
-    if (hash == null) {
-      res.status(401).send({ signin: "user not found" });
-    } else {
-      const match = await bcrypt.compare(password, hash);
-      if (match == true) {
-        req.session.username = username;
-        res.sendStatus(200);
-      } else {
-        res.status(401).send({ signin: "wrong password" });
-      }
-    }
+    console.log("Received sign in request");
+    res.json(credentials);
   } catch (e) {
+    console.log("Error getting data: ", e);
     res.status(400).send({ err: e });
   }
 });
+// router.post("/userSignIn", async (req, res) => {
+//   try {
+//     const username = req.body.username;
+//     const password = req.body.password;
+//     // ask db to validate this user
+//     const hash = await momentDB.getPassword(username);
+//     // const hash = await credentials.
+
+//     // user does not exist
+//     if (hash == null) {
+//       res.status(401).send({ signin: "user not found" });
+//     } else {
+//       const match = await bcrypt.compare(password, hash);
+//       if (match == true) {
+//         req.session.username = username;
+//         res.sendStatus(200);
+//       } else {
+//         res.status(401).send({ signin: "wrong password" });
+//       }
+//     }
+//   } catch (e) {
+//     res.status(400).send({ err: e });
+//   }
+// });
 
 /* User Sign-Up Request. */
 router.post("/userSignUp", async (req, res) => {
-  console.log(req.body.username);
-  try {
-    const username = req.body.username;
-    const password = req.body.password;
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
-
-    // hash password and save to db
-    // await bcrypt.hash(password, saltRounds, async function (err, hash) {
-    console.log("Creating account...");
-    const msg = await momentDB.createCredential(
-      username,
-      password,
-      firstname,
-      lastname
-    );
-    if (msg === "success") {
-      // save username to session
-      console.log("Successfully created account!");
-      req.session.username = username;
-      res.sendStatus(200);
-    } else {
-      res.status(409).send({ register: msg });
+  const newUser = req.body;
+  for (let user of credentials) {
+    if (user.username === newUser.username) {
+      console.log("User exists!");
+      throw new Error("User Exists!");
     }
-    // });
-  } catch (e) {
-    res.status(400).send({ err: e });
   }
+  console.log("Creating new user ", newUser);
+  const userdata = {
+    username: newUser.username,
+    password: newUser.password,
+    firstname: newUser.firstname,
+    lastname: newUser.lastname,
+  };
+  credentials.push(userdata);
+  credentials = JSON.stringify(credentials);
+
+  fs.writeFile("./db/pseudoCredentialDB.json", credentials, (err) => {
+    if (err) {
+      res.status(400).send({ err: err });
+      console.log("Error registering new user");
+    }
+  });
+  res.redirect("/");
 });
+// router.post("/userSignUp", async (req, res) => {
+//   console.log(req.body.username);
+//   try {
+//     const username = req.body.username;
+//     const password = req.body.password;
+//     const firstname = req.body.firstname;
+//     const lastname = req.body.lastname;
+
+//     // hash password and save to db
+//     // await bcrypt.hash(password, saltRounds, async function (err, hash) {
+//     console.log("Creating account...");
+//     const msg = await momentDB.createCredential(
+//       username,
+//       password,
+//       firstname,
+//       lastname
+//     );
+//     if (msg === "success") {
+//       // save username to session
+//       console.log("Successfully created account!");
+//       req.session.username = username;
+//       res.sendStatus(200);
+//     } else {
+//       res.status(409).send({ register: msg });
+//     }
+//     // });
+//   } catch (e) {
+//     res.status(400).send({ err: e });
+//   }
+// });
 
 /* User Log-Out Request. */
 router.get("/userLogout", async (req, res) => {
@@ -90,63 +129,13 @@ router.get("/userLogout", async (req, res) => {
   }
 });
 
-// const pseudoDB = [
-//   {
-//     name: "Peter",
-//     title: "Hello WeLife!",
-//     content:
-//       "Excited to join the WeLife! \
-//     I would like to say hello to all of you in this great community!",
-//     image: "/images/logo.png",
-//     time: "2021\\10\\26",
-//   },
-//   {
-//     name: "Xuejia",
-//     title: "Just join!",
-//     content: "Greetings! This is Xuejia. Glad \
-//     to meet you all here.",
-//     image: "/images/logo.png",
-//     time: "2021\\10\\23",
-//   },
-//   {
-//     name: "Anni",
-//     title: "This is cool",
-//     content: "Happy to join the community~",
-//     image: "/images/logo.png",
-//     time: "2021\\9\\4",
-//   },
-//   {
-//     name: "Anni",
-//     title: "This is cool",
-//     content: "Happy to join the community~",
-//     image: "/images/logo.png",
-//     time: "2021\\9\\4",
-//   },
-//   {
-//     name: "Xuejia",
-//     title: "Just join!",
-//     content: "Greetings! This is Xuejia. Glad \
-//     to meet you all here.",
-//     image: "/images/logo.png",
-//     time: "2021\\10\\23",
-//   },
-//   {
-//     name: "Peter",
-//     title: "Hello WeLife!",
-//     content:
-//       "Excited to join the WeLife! \
-//     I would like to say hello to all of you in this great community!",
-//     image: "/images/logo.png",
-//     time: "2021\\10\\26",
-//   },
-// ];
-
 /* Display moments in general page */
 router.get("/general", async (req, res) => {
   try {
     console.log("Getting data from db");
     // const files = await momentDB.getFiles();
     // res.send({ files: files });
+    res.json(momentDB);
   } catch (e) {
     console.log("Error getting data: ", e);
     res.status(400).send({ err: e });

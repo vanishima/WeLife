@@ -11,6 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "bcrypt": "^5.0.1",
+    "blob": "^0.1.0",
+    "blob-polyfill": "^6.0.20211015",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.4.1"

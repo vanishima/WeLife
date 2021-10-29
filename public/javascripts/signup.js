@@ -15,11 +15,12 @@ async function onFormSignUpSubmit(event) {
   const password = formData.get("password");
 
   const data = {
-    firstname: firstname,
-    lastname: lastname,
     username: username,
     password: password,
+    firstname: firstname,
+    lastname: lastname,
   };
+
   const resRaw = await fetch("/userSignUp", {
     method: "POST",
     headers: {
