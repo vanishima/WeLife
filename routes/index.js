@@ -4,7 +4,7 @@ let router = express.Router();
 const momentDB = require("../db/momentDB.js");
 
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
+// const saltRounds = 10;
 
 /* GET home page. */
 router.get("/", function (req, res) {
@@ -145,10 +145,74 @@ router.get("/userLogout", async (req, res) => {
 router.get("/general", async (req, res) => {
   try {
     console.log("Getting data from db");
-    const files = await momentDB.getFiles();
-    res.send({ files: files });
+    // const files = await momentDB.getFiles();
+    // res.send({ files: files });
   } catch (e) {
     console.log("Error getting data: ", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+/* Get User's homepage to show thier own posts */
+router.get("/myPosts", async (req, res) => {
+  try {
+    // if (!auth(req, res)) {
+    //   return;
+    // }
+    // const username = req.session.username;
+
+    // const userPosts = await myDB.getUserPosts(username);
+
+    // res.status(200).send({ data: userPosts });
+
+    console.log("Getting data from db and send it to reload.");
+  } catch (e) {
+    console.log("Error getting data: ", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+/* Post a new moment to DB */
+router.post("/postMoment", async (req, res) => {
+  try {
+    if (!auth(req, res)) {
+      return;
+    }
+    // get username from session and add username to data object
+    const username = req.session.username;
+
+    // parse data into correct format
+    // const dataJson = JSON.parse(JSON.stringify(req.body));
+    const dataObject = {};
+    dataObject.username = username;
+    dataObject.title = "";
+    dataObject.image = "";
+    dataObject.content = "";
+    dataObject.time = "";
+
+    // insert data into db
+    momentDB.addMomentData(dataObject);
+
+    res.sendStatus(200);
+  } catch (e) {
+    console.error("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+/* Delete a moment */
+router.post("/deletePost", async (req, res) => {
+  try {
+    if (!auth(req, res)) {
+      return;
+    }
+    const username = req.session.username;
+    const postId = req.body.post_id;
+
+    await momentDB.deleteFromPosts(username, postId);
+    res.sendStatus(200);
+  } catch (e) {
+    console.error("Error", e);
     res.status(400).send({ err: e });
   }
 });
