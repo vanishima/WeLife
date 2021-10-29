@@ -39,7 +39,7 @@ async function onFormSignUpSubmit(event) {
     alert.style.display = "none";
     alert.innerHTML = "";
   } else {
-    window.location.assign("/home.html");
+    window.location.assign("/general.html");
   }
 }
 
