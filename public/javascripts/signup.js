@@ -1,16 +1,16 @@
-const formSignUp = document.querySelector("#form-signUp");
+const formSignUp = document.querySelector("#form-register");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const passwordInput = document.querySelector("#passwordInput");
 const alert = document.querySelector(".alert");
 
-/* eslint-disable no-unused-vars */
 async function onFormSignUpSubmit(event) {
   event.preventDefault();
+  console.log("Submitting data");
 
   const formData = new FormData(formSignUp);
 
-  const firstname = formData.get("first_name");
-  const lastname = formData.get("last_name");
+  const firstname = formData.get("firstname");
+  const lastname = formData.get("lastname");
   const username = formData.get("username");
   const password = formData.get("password");
 

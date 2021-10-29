@@ -33,6 +33,25 @@ i {
   -o-transform: scale(2, 2); /* Opera */
 }
 
+/*.see_less {
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}*/
+
+#popup {
+  margin-top: 100px;
+  margin-left: 25px;
+  padding: 30px;
+  height: 280px;
+  max_width: 480px;
+  background: #0066ff;
+  color: #fff;
+  opacity: 0.8;
+  border: 1px solid #0066ff;
+  display: none;
+}
+
 .col-md {
   margin-bottom: 50px;
 }

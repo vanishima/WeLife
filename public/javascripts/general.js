@@ -1,4 +1,5 @@
 const campus = document.querySelector("#moments");
+// const pop = document.querySelector("#popup");
 
 function displayMoments(moments) {
   for (let m of moments) {
@@ -17,13 +18,11 @@ function displayMoments(moments) {
     let cardText = document.createElement("p");
     let viewEntire = document.createElement("a");
     viewEntire.className = "btn stretched-link";
-    // viewEntire.id = "viewEntire";
-    // viewEntire.onclick = "showDetails(`${card.className}`)";
+    viewEntire.id = "viewEntire";
     cardTitle.className = "card-title";
-    cardText.className = "card-text";
+    cardText.className = "card-text see_less";
     cardTitle.innerHTML = m.title;
     cardText.innerHTML = m.content;
-
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(viewEntire);
@@ -31,6 +30,23 @@ function displayMoments(moments) {
     card.appendChild(cardBody);
     colmd.appendChild(card);
     campus.appendChild(colmd);
+
+    // const popup = document.createElement("div");
+    // popup.className = "col-md";
+    // const card_popup = document.createElement("div");
+    // card_popup.className = "card";
+    // card_popup.style = "width: 18rem";
+    // let cardBody_popup = document.createElement("div");
+    // cardBody_popup.className = "card-body";
+    // let cardText_popup = document.createElement("p");
+    // cardText_popup.className = "card-text";
+    // cardText_popup.innerHTML = m.content;
+    // cardBody_popup.appendChild(cardTitle);
+    // cardBody_popup.appendChild(cardText_popup);
+    // card_popup.appendChild(img);
+    // card_popup.appendChild(cardBody_popup);
+    // popup.appendChild(card_popup);
+    // pop.appendChild(popup);
   }
 }
 
@@ -51,3 +67,9 @@ async function reloadMoments() {
 }
 
 reloadMoments();
+
+// $(document).ready(function () {
+//   $("body").on("click", "#viewEntire", function () {
+//     $("#popup").show();
+//   });
+// });
