@@ -66,6 +66,17 @@ async function reloadMoments() {
   displayMoments(moments);
 }
 
+/* eslint-disable no-unused-vars */
+async function onLogoutButtonClick() {
+  const resRaw = await fetch("/userLogout");
+
+  // if user is not logged in
+  if (resRaw.status === 401) {
+    window.location.assign("/index.html");
+    return;
+  }
+}
+
 reloadMoments();
 
 // $(document).ready(function () {
