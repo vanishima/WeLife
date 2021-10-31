@@ -35,3 +35,9 @@ body {
 h1 {
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
+.scenery-img {
+  padding-left: 130px;
+  height: 650px;
+  width: auto;
+}

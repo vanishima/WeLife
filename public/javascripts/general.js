@@ -30,23 +30,6 @@ function displayMoments(moments) {
     card.appendChild(cardBody);
     colmd.appendChild(card);
     campus.appendChild(colmd);
-
-    // const popup = document.createElement("div");
-    // popup.className = "col-md";
-    // const card_popup = document.createElement("div");
-    // card_popup.className = "card";
-    // card_popup.style = "width: 18rem";
-    // let cardBody_popup = document.createElement("div");
-    // cardBody_popup.className = "card-body";
-    // let cardText_popup = document.createElement("p");
-    // cardText_popup.className = "card-text";
-    // cardText_popup.innerHTML = m.content;
-    // cardBody_popup.appendChild(cardTitle);
-    // cardBody_popup.appendChild(cardText_popup);
-    // card_popup.appendChild(img);
-    // card_popup.appendChild(cardBody_popup);
-    // popup.appendChild(card_popup);
-    // pop.appendChild(popup);
   }
 }
 
@@ -55,7 +38,7 @@ async function reloadMoments() {
   campus.innerHTML = "";
   let moments;
   try {
-    const res = await fetch("/general");
+    const res = await fetch("/momentDB");
     if (!res.ok) {
       throw new Error("Response not ok " + res.status);
     }
@@ -66,21 +49,4 @@ async function reloadMoments() {
   displayMoments(moments);
 }
 
-/* eslint-disable no-unused-vars */
-async function onLogoutButtonClick() {
-  const resRaw = await fetch("/userLogout");
-
-  // if user is not logged in
-  if (resRaw.status === 401) {
-    window.location.assign("/index.html");
-    return;
-  }
-}
-
 reloadMoments();
-
-// $(document).ready(function () {
-//   $("body").on("click", "#viewEntire", function () {
-//     $("#popup").show();
-//   });
-// });
