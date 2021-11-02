@@ -42,11 +42,13 @@
         <div class="collapse navbar-collapse" id="navmenu">
           <div class="row ms-auto">
             <div class="col">
-              <p class="welcome-user">Hi, <%= name%>!</p>
+              <p class="welcome-user"></p>
             </div>
-            <div class="col btn-width">
+            <div class="col">
               <form action="/logout?_method=DELETE" method="POST">
-                <button class="btn btn-warning" type="submit">Log Out</button>
+                <button class="btn btn-warning btn-width" type="submit">
+                  Log Out
+                </button>
               </form>
             </div>
           </div>

@@ -15,20 +15,37 @@ initializePassport(
 
 /* GET different page. */
 router.get("/", async (req, res) => {
-  // const loginUser = await req.user;
-  // res.render("index", { name: loginUser.firstname });
-  res.render("index.html");
+  if (req.isAuthenticated()) res.render("general.html");
+  else res.render("index.html");
 });
 
-router.get("/momentDB", checkAuthenticated, async (req, res) => {
+// router.get("/momentDB", checkAuthenticated, async (req, res) => {
+router.get("/momentDB", async (req, res) => {
+  if (req.isAuthenticated()) {
+    try {
+      console.log("The DB ", momentDB);
+      const files = await momentDB.getFiles();
+      const loginUser = await req.user;
+      res.send({ files: files, user: loginUser.firstname });
+    } catch (e) {
+      console.log("Error: ", e);
+      res.status(401).send({ err: e });
+    }
+  } else {
+    res.status(401).send();
+  }
+});
+
+router.get("/getUser", async (req, res) => {
   try {
-    console.log("The DB ", momentDB);
-    const files = await momentDB.getFiles();
     const loginUser = await req.user;
-    res.send({ files: files, user: loginUser.firstname });
+    if (loginUser == undefined) {
+      res.status(401).send();
+    }
+    res.send(loginUser);
   } catch (e) {
     console.log("Error: ", e);
-    res.status(400).send({ err: e });
+    res.status(401).send({ err: e });
   }
 });
 
@@ -37,8 +54,8 @@ router.post(
   "/signin",
   checkNotAuthenticated,
   passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
+    successRedirect: "/index.html",
+    failureRedirect: "/signin.html",
     failureFlash: true,
   })
 );
@@ -67,7 +84,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
 /* User Log-Out Request. */
 router.delete("/logout", (req, res) => {
   req.logOut();
-  res.redirect("/login");
+  res.redirect("/index.html");
 });
 
 /* Get User's homepage to show thier own posts */
@@ -84,7 +101,6 @@ router.get("/myPosts", async (req, res) => {
 router.post("/post", async (req, res) => {
   try {
     const loginUser = await req.user;
-    console.log("Creating new post for user: ", loginUser.firstname);
     const newPostData = {
       name: loginUser.username,
       title: req.body.title,
@@ -93,7 +109,7 @@ router.post("/post", async (req, res) => {
       comments: {},
     };
     momentDB.createFile(newPostData);
-    res.redirect("/general");
+    res.redirect("/general.html");
     console.log("Create post successful! Redirect...");
 
     res.sendStatus(200);
@@ -121,7 +137,7 @@ function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/login");
+  res.redirect("/signin.html");
 }
 
 function checkNotAuthenticated(req, res, next) {

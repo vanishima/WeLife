@@ -1,5 +1,4 @@
 const MongoClient = require("mongodb").MongoClient;
-const imageBasePath = "/uploads/images/";
 
 function momentDB() {
   const momentDB = {};
@@ -138,4 +137,3 @@ function momentDB() {
 }
 
 module.exports = momentDB();
-module.exports.imageBasePath = imageBasePath;

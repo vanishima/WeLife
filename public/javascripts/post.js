@@ -1,45 +1,13 @@
-const formMoment = document.querySelector("#form-moment");
-const successMessage = document.querySelector("#success-message");
+const welcome = document.querySelector(".welcome-user");
 
-/* eslint-disable no-unused-vars */
-async function onFormMomentSubmit(event) {
-  event.preventDefault();
-
-  const formData = new FormData(formMoment);
-
-  const resRaw = await fetch("/postMoment", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  // if user is not logged in
-  if (resRaw.status === 401) {
-    window.location.assign("/signin.html");
-    return;
+async function postWelcome() {
+  const res = await fetch("/momentDB");
+  if (res.status === 401) {
+    window.location.replace("./signin.html");
   }
-
-  // successfully post data
-  if (resRaw.ok) {
-    // reset form content
-    formMoment.reset();
-
-    // show success message to users and delete the message after 3 seconds
-    successMessage.innerHTML = "<p>Success!</p>";
-    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-    await delay(3000);
-    successMessage.innerHTML = "";
-  }
+  const moments = await res.json();
+  const user = await moments.user;
+  welcome.innerHTML = "Hi, " + user;
 }
 
-/* eslint-disable no-unused-vars */
-async function onLogoutButtonClick() {
-  const resRaw = await fetch("/userLogout");
-
-  // if user is not logged in
-  if (resRaw.status === 401) {
-    window.location.assign("/index.html");
-    return;
-  }
-}
+postWelcome();

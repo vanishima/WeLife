@@ -1,40 +1,37 @@
 const campus = document.querySelector("#moments");
+const welcome = document.querySelector(".welcome-user");
 
-function displayMoments(moments) {
-  const colmd = document.createElement("div");
-  colmd.className = "col-md";
-  const card = document.createElement("div");
-  card.className = "card";
-  card.style = "width: 18rem";
-  let cardBody = document.createElement("div");
-  cardBody.className = "card-body";
-  let cardTitle = document.createElement("h5");
-  let cardText = document.createElement("p");
-  let viewEntire = document.createElement("a");
-  viewEntire.className = "btn stretched-link";
-  viewEntire.id = "viewEntire";
-  cardTitle.className = "card-title";
-  cardText.className = "card-text see_less";
-  cardTitle.innerHTML = moments.title;
-  cardText.innerHTML = moments.content;
-  cardBody.appendChild(cardTitle);
-  cardBody.appendChild(cardText);
-  cardBody.appendChild(viewEntire);
-  card.appendChild(cardBody);
-  colmd.appendChild(card);
-  campus.appendChild(colmd);
-}
+//     <div class="mycard col-md" style="18rem">
+//       <div class="mycard-title"></div>
+//       <div class="mycard-username"></div>
+//       <div class="mycard-content"></div>
+//       <a class="mycard-like"></a>
+//       <div class="mycard-time"></div>
+//       <div class="mycard-comments"></div>
+//     </div>
+// function displayMoments(moments) {
+//   const mycard = document.createElement("div");
+//   mycard.className = "mycard col-md";
+//   mycard.style = "width: 18rem";
+//   const title = document.createElement("h5");
+//   const username = document.createElement("div");
+//   const content = document.createElement("div");
+//   const comments = document.createElement("div");
+//   const like = document.createElement("a");
+//   title.innerHTML =
+// }
 
-async function reloadMoments() {
-  campus.innerHTML = "Loading Moments...";
-  campus.innerHTML = "";
-  const res = await fetch("/momentDB");
-  if (!res.ok) {
-    throw new Error("Response not ok " + res.status);
-  }
-  const moments = await res.json();
-  console.log("Got data", moments);
-  moments.files.forEach(displayMoments);
-}
+// async function reloadMoments() {
+//   campus.innerHTML = "Loading Moments...";
+//   campus.innerHTML = "";
+//   const res = await fetch("/momentDB");
+//   if (res.status === 401) {
+//     window.location.replace("./signin.html");
+//   }
+//   const moments = await res.json();
+//   moments.files.forEach(displayMoments);
+//   const user = await moments.user;
+//   welcome.innerHTML = "Hi, " + user;
+// }
 
-reloadMoments();
+// reloadMoments();
