@@ -3,6 +3,14 @@ body {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.btn-width {
+  width: 125px;
+}
+
+.welcome-user {
+  padding-top: 8px;
+}
+
 .sidebar {
   position: fixed;
   height: 100%;

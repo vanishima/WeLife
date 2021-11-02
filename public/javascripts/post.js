@@ -7,18 +7,11 @@ async function onFormMomentSubmit(event) {
 
   const formData = new FormData(formMoment);
 
-  const data = {
-    title: "Happy Zoo",
-    content: "I'm so happy to go to the Happy Zoo....",
-    image: "../images/logo.png",
-  };
-
   const resRaw = await fetch("/postMoment", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   });
 
   // if user is not logged in

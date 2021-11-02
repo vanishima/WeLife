@@ -3,6 +3,14 @@ body {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.btn-width {
+  width: 125px;
+}
+
+.welcome-user {
+  padding-top: 8px;
+}
+
 .sidebar {
   position: fixed;
   height: 100%;
@@ -39,12 +47,6 @@ i {
   -o-transform: scale(2, 2); /* Opera */
 }
 
-/*.see_less {
-  overflow: auto;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}*/
-
 #popup {
   margin-top: 100px;
   margin-left: 25px;
@@ -79,10 +81,10 @@ ul {
 }
 
 .card img {
-  height: 200px;
+  height: 150px;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
-  width: 100%;
+  width: 150px;
 }
 
 .card:hover {

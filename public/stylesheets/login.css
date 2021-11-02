@@ -11,6 +11,10 @@ img {
   width: 60%;
 }
 
+.welcome-user {
+  padding-top: 8px;
+}
+
 .btn {
   width: 400px;
   margin-top: 20px;

@@ -40,9 +40,16 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navmenu">
-          <form class = "ms-auto" action="/logout?_method=DELETE" method="POST">
-            <button class="btn btn-warning" type="submit">Log Out</button>
-          </form>
+          <div class="row ms-auto">
+            <div class="col">
+              <p class="welcome-user">Hi, <%= name%>!</p>
+            </div>
+            <div class="col btn-width">
+              <form action="/logout?_method=DELETE" method="POST">
+                <button class="btn btn-warning" type="submit">Log Out</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -64,12 +71,17 @@
           </a>
           <ul>
             <li>
-              <a class="nav_btn btn btn-lg" href="./general">
+              <a class="nav_btn btn btn-lg" href="/general">
                 <i class="fas fa-home-lg"></i>
               </a>
             </li>
             <li>
-              <a class="nav_btn btn btn-lg" href="./home">
+              <a href="/post" class="nav_btn btn btn-lg">
+                <i class="fas fa-paper-plane"></i>
+              </a>
+            </li>
+            <li>
+              <a class="nav_btn btn btn-lg" href="/home">
                 <i class="fas fa-user"></i>
               </a>
             </li>

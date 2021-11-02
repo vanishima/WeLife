@@ -40,19 +40,16 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navmenu">
-<!--           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a
-                href="./index"
-                class="nav-link bg-secondary text-light"
-                onclick="onLogoutButtonClick()"
-                >Log Out</a
-              >
-            </li>
-          </ul> -->
-          <form class="ms-auto" action="/logout?_method=DELETE" method="POST">
-            <button class="btn btn-warning" type="submit">Log Out</button>
-          </form>
+          <div class="row ms-auto">
+            <div class="col">
+              <p class="welcome-user">Hi, <%= name%>!</p>
+            </div>
+            <div class="col btn-width">
+              <form action="/logout?_method=DELETE" method="POST">
+                <button class="btn btn-warning" type="submit">Log Out</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
