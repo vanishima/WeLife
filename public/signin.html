@@ -20,16 +20,14 @@
     <div class="alert alert-danger" role="alert"></div>
     <div class="container">
       <div id="content-box">
-        <a href="/">
+        <a href="/index.html">
           <img src="./images/logo.png" alt="WeLife Logo" />
         </a>
         <p>Welcome Back</p>
 
-        <% if (messages.error) { %>
-          <%= messages.error %>
-        <% } %>
+        <% if (messages.error) { %> <%= messages.error %> <% } %>
         <!-- <form id="form-signIn" onsubmit="onFormSignInSubmit(event)"> -->
-        <form id="form-signIn" action="/signin" method="POST">
+        <form id="form-signIn" action="/signin.html" method="POST">
           <div class="form-floating mb-4">
             <input
               type="text"
@@ -56,7 +54,7 @@
 
         <div class="footer-text">
           New user?
-          <a href="/signup">Sign Up</a>
+          <a href="/signup.html">Sign Up</a>
         </div>
       </div>
     </div>

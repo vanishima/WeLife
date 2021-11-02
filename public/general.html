@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="User's personal homepage to show all thier own posts."
+      content="The main page to show all moments in weLife."
     />
     <meta name="author" content="Anni Lin & Xuejia Yang" />
 
@@ -59,7 +59,7 @@
       <div class="container">
         <!-- side bar -->
         <div class="sidebar col-2 bg-light">
-          <a href="/" class="navbar-brand">
+          <a href="./index.html" class="navbar-brand">
             <img
               class="me-2"
               width="70"
@@ -71,12 +71,17 @@
           </a>
           <ul>
             <li>
-              <a class="nav_btn btn btn-lg" href="/general">
+              <a class="nav_btn btn btn-lg" href="/general.html">
                 <i class="fas fa-home-lg"></i>
               </a>
             </li>
             <li>
-              <a class="nav_btn btn btn-lg" href="/home">
+              <a href="/post.html" class="nav_btn btn btn-lg">
+                <i class="fas fa-paper-plane"></i>
+              </a>
+            </li>
+            <li>
+              <a class="nav_btn btn btn-lg" href="/home.html">
                 <i class="fas fa-user"></i>
               </a>
             </li>
@@ -86,7 +91,6 @@
         <div class="row p-3">
           <div class="col-12">
             <div id="moments" class="row row-cols-1 row-cols-3"></div>
-            <div id="popup" class="row row-cols-1 row-cols-3"></div>
           </div>
         </div>
       </div>
@@ -101,6 +105,6 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script src="./javascripts/home.js"></script>
+    <script src="./javascripts/general.js"></script>
   </body>
 </html>

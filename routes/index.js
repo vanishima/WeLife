@@ -14,39 +14,18 @@ initializePassport(
 );
 
 /* GET different page. */
-router.get("/", checkAuthenticated, async (req, res) => {
-  const loginUser = await req.user;
-  res.render("index", { name: loginUser.firstname });
-});
-
-router.get("/login", checkNotAuthenticated, (req, res) => {
-  res.render("signin.ejs");
-});
-
-router.get("/signup", checkNotAuthenticated, (req, res) => {
-  res.render("signup.ejs");
-});
-
-router.get("/home", checkAuthenticated, async (req, res) => {
-  const loginUser = await req.user;
-  res.render("home.ejs", { name: loginUser.firstname });
-});
-
-router.get("/post", checkAuthenticated, async (req, res) => {
-  const loginUser = await req.user;
-  res.render("post.ejs", { name: loginUser.firstname });
-});
-
-router.get("/general", checkAuthenticated, async (req, res) => {
-  const loginUser = await req.user;
-  res.render("general.ejs", { name: loginUser.firstname });
+router.get("/", async (req, res) => {
+  // const loginUser = await req.user;
+  // res.render("index", { name: loginUser.firstname });
+  res.render("index.html");
 });
 
 router.get("/momentDB", checkAuthenticated, async (req, res) => {
   try {
     console.log("The DB ", momentDB);
     const files = await momentDB.getFiles();
-    res.send({ files: files });
+    const loginUser = await req.user;
+    res.send({ files: files, user: loginUser.firstname });
   } catch (e) {
     console.log("Error: ", e);
     res.status(400).send({ err: e });
