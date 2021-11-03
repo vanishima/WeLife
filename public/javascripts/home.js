@@ -1,78 +1,46 @@
-const dorms = document.querySelector("#moments");
+const campus = document.querySelector("#moments");
+const welcome = document.querySelector(".welcome-user");
 
-const postsData = [
-  {
-    name: "Anni",
-    title: "This is cool",
-    content: "Happy to join the community~",
-    image: "/images/logo.png",
-    time: "2021\\9\\4",
-  },
-  {
-    name: "Anni",
-    title: "This is cool",
-    content: "Happy to join the community~",
-    image: "/images/logo.png",
-    time: "2021\\9\\4",
-  },
-  {
-    name: "Anni",
-    title: "Just join!",
-    content: "Greetings! This is Anni. Glad \
-    to meet you all here.",
-    image: "/images/logo.png",
-    time: "2021\\10\\23",
-  },
-];
-
-function displayPosts(posts) {
-  for (let m of posts) {
-    const colmd = document.createElement("div");
-    colmd.className = "col-md";
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style = "width: 18rem";
-    let img = document.createElement("img");
-    img.className = "card-img-top";
-    img.src = m.image;
-    img.alt = "user image";
-    let cardBody = document.createElement("div");
-    cardBody.className = "card-body";
-    let cardTitle = document.createElement("h5");
-    let cardText = document.createElement("p");
-    let viewEntire = document.createElement("a");
-    viewEntire.className = "btn stretched-link";
-    viewEntire.id = "viewEntire";
-    cardTitle.className = "card-title";
-    cardText.className = "card-text see_less";
-    cardTitle.innerHTML = m.title;
-    cardText.innerHTML = m.content;
-    cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardText);
-    cardBody.appendChild(viewEntire);
-    card.appendChild(img);
-    card.appendChild(cardBody);
-    colmd.appendChild(card);
-    dorms.appendChild(colmd);
-  }
+function displayMoments(moments) {
+  const mycard = document.createElement("div");
+  mycard.className = "mycard col";
+  mycard.style = "18rem";
+  const title = document.createElement("h4");
+  const username = document.createElement("div");
+  username.style = "float: left";
+  const content = document.createElement("div");
+  content.style = "float: left";
+  const time = document.createElement("div");
+  time.className = "time";
+  const like = document.createElement("a");
+  like.className = "like-btn btn btn-lg";
+  const love = document.createElement("i");
+  love.className = "fa fa-heart";
+  like.appendChild(love);
+  title.innerHTML = moments.title;
+  username.innerHTML = "@" + moments.name + ":";
+  content.innerHTML = moments.content;
+  time.innerHTML = moments.time;
+  mycard.appendChild(title);
+  mycard.appendChild(username);
+  mycard.appendChild(content);
+  mycard.appendChild(time);
+  mycard.appendChild(like);
+  campus.appendChild(mycard);
 }
 
-async function reloadPosts() {
-  dorms.innerHTML = "Loading Use's Posts...";
-  dorms.innerHTML = "";
-  let posts;
-  try {
-    // const res = await fetch("/myPosts");
-    // if (!res.ok) {
-    //   throw new Error("Response not ok " + res.status);
-    // }
-    // posts = await res.json();
-    posts = postsData;
-    console.log(posts);
-  } catch (e) {
-    dorms.innerHTML = e.msg;
+async function reloadMoments() {
+  campus.innerHTML = "Loading Moments...";
+  campus.innerHTML = "";
+  const res = await fetch("/myOwnPosts");
+  if (res.status === 401) {
+    window.location.replace("./signin.html");
   }
-  displayPosts(posts);
+  const moments = await res.json();
+  console.log("moments", moments);
+  moments.files.forEach(displayMoments);
+  const user = await moments.user;
+  welcome.innerHTML = "Hi, " + user;
 }
 
-reloadPosts();
+reloadMoments();

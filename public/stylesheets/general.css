@@ -47,19 +47,6 @@ i {
   -o-transform: scale(2, 2); /* Opera */
 }
 
-#popup {
-  margin-top: 100px;
-  margin-left: 25px;
-  padding: 30px;
-  height: 280px;
-  max_width: 480px;
-  background: #0066ff;
-  color: #fff;
-  opacity: 0.8;
-  border: 1px solid #0066ff;
-  display: none;
-}
-
 .col-md {
   margin-bottom: 50px;
 }
@@ -72,22 +59,23 @@ ul {
   list-style-type: none;
 }
 
-.card {
+.mycard {
+  width: 18rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
   border-radius: 15px;
-  border: 5px solid #000;
+  border: 5px solid rgba(0, 0, 0, 0.8);
   margin-right: 30px;
+  justify-content: left;
 }
 
-.card img {
-  height: 150px;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-  width: 150px;
+.time {
+  align-content: end;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.8rem;
+  float: right;
+  margin-top: 10px;
 }
 
-.card:hover {
-  border-color: #fff;
-  transition: 0.3s;
+.like-btn {
+  margin-top: 20px;
 }

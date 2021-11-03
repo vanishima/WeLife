@@ -55,16 +55,32 @@ function momentDB() {
       const filesCol = db.collection("files");
       console.log("Collection ready, inserting ", file);
       const files = await filesCol.insertOne({
-        name: file.username,
+        name: file.name,
         title: file.title,
         content: file.content,
-        image: file.image,
-        imageFileName: file.imageFileName,
         time: new Date(),
         like: 0,
       });
       console.log("Inserted ", files);
       return files;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  momentDB.getMyOwnFiles = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected to the db");
+      const db = client.db(DB_NAME);
+      const credentials = db.collection("files");
+      console.log("Collection ready, finding my own posts: ", query);
+      const result = await credentials.find(query).toArray();
+      return result;
     } finally {
       console.log("Closing the connection");
       client.close();

@@ -74,7 +74,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
     };
     momentDB.createCredential(newUserData);
     console.log(newUserData);
-    res.redirect("/login");
+    res.redirect("/signin.html");
   } catch (e) {
     console.log("Error signing up new user: ", e);
     res.redirect("/signup");
@@ -88,12 +88,19 @@ router.delete("/logout", (req, res) => {
 });
 
 /* Get User's homepage to show thier own posts */
-router.get("/myPosts", async (req, res) => {
-  try {
-    console.log("Getting data from db and send it to reload.");
-  } catch (e) {
-    console.log("Error getting data: ", e);
-    res.status(400).send({ err: e });
+router.get("/myOwnPosts", async (req, res) => {
+  if (req.isAuthenticated()) {
+    try {
+      console.log("The DB ", momentDB);
+      const loginUser = await req.user;
+      const files = await momentDB.getMyOwnFiles({ name: loginUser.username });
+      res.send({ files: files, user: loginUser.firstname });
+    } catch (e) {
+      console.log("Error: ", e);
+      res.status(401).send({ err: e });
+    }
+  } else {
+    res.status(401).send();
   }
 });
 
@@ -106,7 +113,6 @@ router.post("/post", async (req, res) => {
       title: req.body.title,
       content: req.body.content,
       like: 0,
-      comments: {},
     };
     momentDB.createFile(newPostData);
     res.redirect("/general.html");
@@ -132,13 +138,6 @@ router.post("/deletePost", async (req, res) => {
     res.status(400).send({ err: e });
   }
 });
-
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/signin.html");
-}
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
