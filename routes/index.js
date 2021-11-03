@@ -125,13 +125,55 @@ router.post("/post", async (req, res) => {
   }
 });
 
-/* Delete a moment */
-router.post("/deletePost", async (req, res) => {
-  try {
-    const username = req.session.username;
-    const postId = req.body.post_id;
+/* Edit a moment to DB */
+router.post("/editPost", async (req, res) => {
+  if (req.isAuthenticated()) {
+    try {
+      console.log("The DB ", momentDB);
+      const title = req.body.title;
+      const newContent = {
+        content: req.body.content,
+      };
+      const post = await momentDB.editMyOwnFiles({
+        title: title,
+        content: newContent,
+      });
+      res.send({ post: post });
+      res.sendStatus(200);
+    } catch (e) {
+      console.log("Error: ", e);
+      res.status(401).send({ err: e });
+    }
+  } else {
+    res.status(401).send();
+  }
+});
 
-    await momentDB.deleteFromPosts(username, postId);
+/* Delete a moment */
+router.delete("/deletePost", async (req, res) => {
+  if (req.isAuthenticated()) {
+    try {
+      console.log("The DB ", momentDB);
+      const title = req.body.title;
+      const post = await momentDB.deleteMyOwnFiles({ title: title });
+      res.send({ post: post });
+      res.sendStatus(200);
+    } catch (e) {
+      console.log("Error: ", e);
+      res.status(401).send({ err: e });
+    }
+  } else {
+    res.status(401).send();
+  }
+});
+
+/* Add like to posts  */
+router.post("/likePost", async (req, res) => {
+  try {
+    const title = req.body.title;
+    const likes = await momentDB.addLikes(title);
+    res.send({ likes: likes });
+    console.log("Add new likes for the post.");
     res.sendStatus(200);
   } catch (e) {
     console.error("Error", e);

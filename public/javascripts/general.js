@@ -42,4 +42,23 @@ async function reloadMoments() {
   welcome.innerHTML = "Hi, " + user;
 }
 
+async function addLikes(title) {
+  const data = { title: title};
+  const res = await fetch("/likePost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  // if user is not logged in
+  if (res.status === 401) {
+    window.location.assign("/signin.html");
+  }
+
+  // need to reload the collections when user update data from collections
+  reloadMoments();
+}
+
 reloadMoments();

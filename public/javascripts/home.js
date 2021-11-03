@@ -20,7 +20,6 @@ function displayMoments(moments) {
   title.innerHTML = moments.title;
   username.innerHTML = "@" + moments.name + ":";
   content.innerHTML = moments.content;
-  time.innerHTML = moments.time;
   mycard.appendChild(title);
   mycard.appendChild(username);
   mycard.appendChild(content);
@@ -41,6 +40,46 @@ async function reloadMoments() {
   moments.files.forEach(displayMoments);
   const user = await moments.user;
   welcome.innerHTML = "Hi, " + user;
+}
+
+async function deletePost(title) {
+  const data = { title: title };
+  const resRaw = await fetch("/deletePost", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  // if user is not logged in
+  if (resRaw.status === 401) {
+    window.location.assign("/signin.html");
+    return;
+  }
+
+  // need to reload the collections when user delete data from collections
+  reloadMoments();
+}
+
+async function editPost(title, content) {
+  const data = { title: title, content: content };
+  const resRaw = await fetch("/editPost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  // if user is not logged in
+  if (resRaw.status === 401) {
+    window.location.assign("/signin.html");
+    return;
+  }
+
+  // need to reload the collections when user update data from collections
+  reloadMoments();
 }
 
 reloadMoments();

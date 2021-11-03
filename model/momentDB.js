@@ -23,27 +23,6 @@ function momentDB() {
     }
   };
 
-  momentDB.deleteFile = async (file) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      console.log("Connecting to the db");
-      await client.connect();
-      console.log("Connected to the momentDB");
-      const db = client.db(DB_NAME);
-      const filesCol = db.collection("files");
-      console.log("Collection ready, deleting ", file);
-      const files = await filesCol.deleteOne({
-        username: file.username,
-      });
-      console.log("Got files ", files);
-      return files;
-    } finally {
-      console.log("Closing the connection");
-      client.close();
-    }
-  };
-
   momentDB.createFile = async (file) => {
     let client;
     try {
@@ -81,6 +60,75 @@ function momentDB() {
       console.log("Collection ready, finding my own posts: ", query);
       const result = await credentials.find(query).toArray();
       return result;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  momentDB.deleteMyOwnFiles = async (title) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected to the db");
+      const db = client.db(DB_NAME);
+      console.log("Collection ready, deleting my own posts: ", title);
+      const post = await db.deleteOne({
+        title: title,
+      });
+      console.log("Got files ", post);
+      return post;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  momentDB.editMyOwnFiles = async (title, content) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected to the db");
+      const db = client.db(DB_NAME);
+      console.log("Collection ready, updating my own post: ", title);
+      const post = await db.updateOne(
+        { title: title },
+        {
+          $set: { content: content },
+        }
+      );
+      console.log("Got files ", post);
+      return post;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  momentDB.addLikes = async (title) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected to the db");
+      const db = client.db(DB_NAME);
+      console.log(
+        "Collection ready, updating the number of likes for the post: ",
+        title
+      );
+      const post = await db.updateOne(
+        { title: title },
+        {
+          $inc: { like: 1 },
+        }
+      );
+      console.log("Got files ", post);
+      return post;
     } finally {
       console.log("Closing the connection");
       client.close();
