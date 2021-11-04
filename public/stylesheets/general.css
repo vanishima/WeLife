@@ -1,6 +1,6 @@
 body {
   background: #ddd;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .btn-width {
@@ -65,6 +65,7 @@ i {
 
 h4 {
   margin-bottom: 25px;
+  padding-top: 20px;
 }
 
 ul {
@@ -78,6 +79,14 @@ ul {
   border: 5px solid rgba(0, 0, 0, 0.8);
   margin-right: 30px;
   margin-bottom: 20px;
+}
+
+.display-content {
+  float: left;
+}
+
+.display-username {
+  float: left;
 }
 
 .love-icon {

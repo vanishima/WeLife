@@ -4,12 +4,11 @@ const welcome = document.querySelector(".welcome-user");
 function displayMoments(moments) {
   const mycard = document.createElement("div");
   mycard.className = "mycard col";
-  mycard.style = "18rem";
   const title = document.createElement("h4");
   const username = document.createElement("div");
-  username.style = "float: left";
+  username.className = "display-username";
   const content = document.createElement("div");
-  content.style = "float: left";
+  content.className = "display-content";
   const time = document.createElement("div");
   time.className = "time";
   const likeForm = document.createElement("form");

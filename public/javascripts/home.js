@@ -4,12 +4,9 @@ const welcome = document.querySelector(".welcome-user");
 function displayMoments(moments) {
   const mycard = document.createElement("div");
   mycard.className = "mycard col";
-  mycard.style = "18rem";
   const title = document.createElement("h4");
   const username = document.createElement("div");
-  username.style = "float: left";
   const content = document.createElement("div");
-  content.style = "float: left";
   const time = document.createElement("div");
   time.className = "time-home";
   time.innerHTML = moments.time;
@@ -63,7 +60,6 @@ async function reloadMoments() {
     window.location.replace("./signin.html");
   }
   const moments = await res.json();
-  console.log("moments", moments);
   moments.files.forEach(displayMoments);
   const user = await moments.user;
   welcome.innerHTML = "Hi, " + user;

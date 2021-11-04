@@ -23,12 +23,10 @@ router.get("/", async (req, res) => {
 router.get("/momentDB", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
-      console.log("The DB ", momentDB);
       const files = await momentDB.getFiles();
       const loginUser = await req.user;
       res.send({ files: files, user: loginUser.firstname });
     } catch (e) {
-      console.log("Error: ", e);
       res.status(401).send({ err: e });
     }
   } else {
@@ -44,7 +42,6 @@ router.get("/getUser", async (req, res) => {
     }
     res.send(loginUser);
   } catch (e) {
-    console.log("Error: ", e);
     res.status(401).send({ err: e });
   }
 });
@@ -52,7 +49,6 @@ router.get("/getUser", async (req, res) => {
 // User sign in
 router.post(
   "/signin",
-  checkNotAuthenticated,
   passport.authenticate("local", {
     successRedirect: "/index.html",
     failureRedirect: "/signin.html",
@@ -61,9 +57,8 @@ router.post(
 );
 
 /* User Sign-Up Request. */
-router.post("/signup", checkNotAuthenticated, async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
-    console.log("Creating new user ", req);
     const hashPassword = await bcrypt.hash(req.body.password, 10);
     const newUserData = {
       id: Date.now().toString(),
@@ -73,10 +68,8 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
       lastname: req.body.lastname,
     };
     momentDB.createCredential(newUserData);
-    console.log(newUserData);
     res.redirect("/signin.html");
   } catch (e) {
-    console.log("Error signing up new user: ", e);
     res.redirect("/signup");
   }
 });
@@ -91,12 +84,10 @@ router.delete("/logout", (req, res) => {
 router.get("/myOwnPosts", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
-      console.log("The DB ", momentDB);
       const loginUser = await req.user;
       const files = await momentDB.getMyOwnFiles({ name: loginUser.username });
       res.send({ files: files, user: loginUser.firstname });
     } catch (e) {
-      console.log("Error: ", e);
       res.status(401).send({ err: e });
     }
   } else {
@@ -117,11 +108,9 @@ router.post("/post", async (req, res) => {
     };
     momentDB.createFile(newPostData);
     res.redirect("/general.html");
-    console.log("Create post successful! Redirect...");
 
     res.sendStatus(200);
   } catch (e) {
-    console.error("Error", e);
     res.status(400).send({ err: e });
   }
 });
@@ -134,7 +123,6 @@ router.post("/editPost", async (req, res) => {
       await momentDB.deleteMyOwnFiles({ id: id });
       res.redirect("./post.html");
     } catch (e) {
-      console.log("Error: ", e);
       res.status(401).send({ err: e });
     }
   } else {
@@ -150,7 +138,6 @@ router.post("/deletePost", async (req, res) => {
       await momentDB.deleteMyOwnFiles({ id: id });
       res.redirect("./home.html");
     } catch (e) {
-      console.log("Error: ", e);
       res.status(401).send({ err: e });
     }
   } else {
@@ -162,20 +149,11 @@ router.post("/deletePost", async (req, res) => {
 router.post("/likePost", async (req, res) => {
   try {
     const id = req.body.id;
-    console.log("current body: ", req.body);
     await momentDB.addLikes(id);
     res.redirect("./general.html");
   } catch (e) {
-    console.error("Error", e);
     res.status(400).send({ err: e });
   }
 });
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/");
-  }
-  next();
-}
 
 module.exports = router;
