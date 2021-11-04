@@ -109,6 +109,7 @@ router.post("/post", async (req, res) => {
   try {
     const loginUser = await req.user;
     const newPostData = {
+      id: Date.now().toString(),
       name: loginUser.username,
       title: req.body.title,
       content: req.body.content,
@@ -170,11 +171,10 @@ router.delete("/deletePost", async (req, res) => {
 /* Add like to posts  */
 router.post("/likePost", async (req, res) => {
   try {
-    const title = req.body.title;
-    const likes = await momentDB.addLikes(title);
-    res.send({ likes: likes });
-    console.log("Add new likes for the post.");
-    res.sendStatus(200);
+    const id = req.body.id;
+    console.log("current body: ", req.body);
+    await momentDB.addLikes(id);
+    res.redirect("./general.html");
   } catch (e) {
     console.error("Error", e);
     res.status(400).send({ err: e });

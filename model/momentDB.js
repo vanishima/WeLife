@@ -34,6 +34,7 @@ function momentDB() {
       const filesCol = db.collection("files");
       console.log("Collection ready, inserting ", file);
       const files = await filesCol.insertOne({
+        id: file.id,
         name: file.name,
         title: file.title,
         content: file.content,
@@ -56,9 +57,9 @@ function momentDB() {
       await client.connect();
       console.log("Connected to the db");
       const db = client.db(DB_NAME);
-      const credentials = db.collection("files");
+      const files = db.collection("files");
       console.log("Collection ready, finding my own posts: ", query);
-      const result = await credentials.find(query).toArray();
+      const result = await files.find(query).toArray();
       return result;
     } finally {
       console.log("Closing the connection");
@@ -74,8 +75,9 @@ function momentDB() {
       await client.connect();
       console.log("Connected to the db");
       const db = client.db(DB_NAME);
+      const files = db.collection("files");
       console.log("Collection ready, deleting my own posts: ", title);
-      const post = await db.deleteOne({
+      const post = await files.deleteOne({
         title: title,
       });
       console.log("Got files ", post);
@@ -109,7 +111,7 @@ function momentDB() {
     }
   };
 
-  momentDB.addLikes = async (title) => {
+  momentDB.addLikes = async (id) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -119,16 +121,35 @@ function momentDB() {
       const db = client.db(DB_NAME);
       console.log(
         "Collection ready, updating the number of likes for the post: ",
-        title
+        id
       );
-      const post = await db.updateOne(
-        { title: title },
+
+      const post = await db.collection("files").updateOne(
+        { id: id },
         {
           $inc: { like: 1 },
         }
       );
       console.log("Got files ", post);
       return post;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  momentDB.findFile = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected to the db");
+      const db = client.db(DB_NAME);
+      const files = db.collection("files");
+      console.log("Collection ready, finding file: ", query);
+      const result = await files.findOne(query);
+      return result;
     } finally {
       console.log("Closing the connection");
       client.close();

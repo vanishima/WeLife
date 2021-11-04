@@ -68,6 +68,19 @@ ul {
   justify-content: left;
 }
 
+.love-icon {
+  transform: scale(1, 1);
+  -ms-transform: scale(1, 1); /* IE 9 */
+  -moz-transform: scale(1, 1); /* Firefox */
+  -webkit-transform: scale(1, 1); /* Safari and Chrome */
+  -o-transform: scale(1, 1); /* Opera */
+}
+
+.likeform {
+  display: inline;
+  margin-left: 9rem;
+}
+
 .time {
   align-content: end;
   color: rgba(0, 0, 0, 0.5);

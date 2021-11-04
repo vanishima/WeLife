@@ -12,11 +12,26 @@ function displayMoments(moments) {
   content.style = "float: left";
   const time = document.createElement("div");
   time.className = "time";
-  const like = document.createElement("a");
+  const likeForm = document.createElement("form");
+  likeForm.className = "likeform";
+  likeForm.action = "/likePost";
+  likeForm.method = "POST";
+  likeForm.style = "";
+  const idInput = document.createElement("input");
+  idInput.type = "hidden";
+  idInput.name = "id";
+  idInput.value = moments.id;
+  const like = document.createElement("button");
   like.className = "like-btn btn btn-lg";
+  like.type = "submit";
   const love = document.createElement("i");
-  love.className = "fa fa-heart";
+  love.className = "fa fa-heart love-icon";
+  const likeCount = document.createElement("p");
+  likeCount.innerHTML = moments.like;
   like.appendChild(love);
+  likeForm.appendChild(idInput);
+  likeForm.appendChild(like);
+  likeForm.appendChild(likeCount);
   title.innerHTML = moments.title;
   username.innerHTML = "@" + moments.name + ":";
   content.innerHTML = moments.content;
@@ -25,7 +40,7 @@ function displayMoments(moments) {
   mycard.appendChild(username);
   mycard.appendChild(content);
   mycard.appendChild(time);
-  mycard.appendChild(like);
+  mycard.appendChild(likeForm);
   campus.appendChild(mycard);
 }
 
@@ -41,24 +56,4 @@ async function reloadMoments() {
   const user = await moments.user;
   welcome.innerHTML = "Hi, " + user;
 }
-
-async function addLikes(title) {
-  const data = { title: title};
-  const res = await fetch("/likePost", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  // if user is not logged in
-  if (res.status === 401) {
-    window.location.assign("/signin.html");
-  }
-
-  // need to reload the collections when user update data from collections
-  reloadMoments();
-}
-
 reloadMoments();
