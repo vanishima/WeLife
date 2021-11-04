@@ -67,7 +67,7 @@ function momentDB() {
     }
   };
 
-  momentDB.deleteMyOwnFiles = async (title) => {
+  momentDB.deleteMyOwnFiles = async (id) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -75,20 +75,16 @@ function momentDB() {
       await client.connect();
       console.log("Connected to the db");
       const db = client.db(DB_NAME);
-      const files = db.collection("files");
-      console.log("Collection ready, deleting my own posts: ", title);
-      const post = await files.deleteOne({
-        title: title,
-      });
-      console.log("Got files ", post);
-      return post;
+      console.log("Collection ready, deleting my own posts: ", id);
+      const now = await db.collection("files").deleteOne({ id: id.id });
+      return now;
     } finally {
       console.log("Closing the connection");
       client.close();
     }
   };
 
-  momentDB.editMyOwnFiles = async (title, content) => {
+  momentDB.editMyOwnFiles = async (id, content) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -96,13 +92,11 @@ function momentDB() {
       await client.connect();
       console.log("Connected to the db");
       const db = client.db(DB_NAME);
-      console.log("Collection ready, updating my own post: ", title);
-      const post = await db.updateOne(
-        { title: title },
-        {
-          $set: { content: content },
-        }
-      );
+      console.log("Collection ready, updating my own post: ", id);
+      const post = await db.collection("files").updateOne({
+        id: id,
+        $set: { content: content },
+      });
       console.log("Got files ", post);
       return post;
     } finally {

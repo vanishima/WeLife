@@ -11,32 +11,47 @@ function displayMoments(moments) {
   const content = document.createElement("div");
   content.style = "float: left";
   const time = document.createElement("div");
-  time.className = "time";
+  time.className = "time-home";
+  time.innerHTML = moments.time;
   const deleteForm = document.createElement("form");
   deleteForm.className = "deleteform";
   deleteForm.action = "/deletePost";
   deleteForm.method = "POST";
-  deleteForm.style = "";
   const idInput = document.createElement("input");
   idInput.type = "hidden";
   idInput.name = "id";
   idInput.value = moments.id;
   const del = document.createElement("button");
-  del.className = "like-btn btn btn-lg";
+  del.className = "btn btn-lg";
   del.type = "submit";
   const deleteIcon = document.createElement("i");
-  deleteIcon.className = "fa fa-heart love-icon";
+  deleteIcon.className = "fa fa-times-circle";
   del.appendChild(deleteIcon);
   deleteForm.appendChild(idInput);
   deleteForm.appendChild(del);
+
+  const editForm = document.createElement("form");
+  editForm.className = "deleteform";
+  editForm.action = "/editPost";
+  editForm.method = "POST";
+  const edit = document.createElement("button");
+  edit.className = "btn btn-lg";
+  edit.type = "submit";
+  const editIcon = document.createElement("i");
+  editIcon.className = "fas fa-edit";
+  edit.appendChild(editIcon);
+  editForm.appendChild(idInput);
+  editForm.appendChild(edit);
+
   title.innerHTML = moments.title;
   username.innerHTML = "@" + moments.name + ":";
   content.innerHTML = moments.content;
+  mycard.appendChild(deleteForm);
   mycard.appendChild(title);
   mycard.appendChild(username);
   mycard.appendChild(content);
   mycard.appendChild(time);
-  mycard.appendChild(del);
+  mycard.appendChild(editForm);
   campus.appendChild(mycard);
 }
 
@@ -52,46 +67,6 @@ async function reloadMoments() {
   moments.files.forEach(displayMoments);
   const user = await moments.user;
   welcome.innerHTML = "Hi, " + user;
-}
-
-async function deletePost(title) {
-  const data = { title: title };
-  const resRaw = await fetch("/deletePost", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  // if user is not logged in
-  if (resRaw.status === 401) {
-    window.location.assign("/signin.html");
-    return;
-  }
-
-  // need to reload the collections when user delete data from collections
-  reloadMoments();
-}
-
-async function editPost(title, content) {
-  const data = { title: title, content: content };
-  const resRaw = await fetch("/editPost", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  // if user is not logged in
-  if (resRaw.status === 401) {
-    window.location.assign("/signin.html");
-    return;
-  }
-
-  // need to reload the collections when user update data from collections
-  reloadMoments();
 }
 
 reloadMoments();

@@ -16,7 +16,6 @@ function displayMoments(moments) {
   likeForm.className = "likeform";
   likeForm.action = "/likePost";
   likeForm.method = "POST";
-  likeForm.style = "";
   const idInput = document.createElement("input");
   idInput.type = "hidden";
   idInput.name = "id";

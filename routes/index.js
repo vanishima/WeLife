@@ -130,16 +130,9 @@ router.post("/post", async (req, res) => {
 router.post("/editPost", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
-      console.log("The DB ", momentDB);
       const id = req.body.id;
-      const newContent = {
-        content: req.body.content,
-      };
-      await momentDB.editMyOwnFiles({
-        id: id,
-        content: newContent,
-      });
-      res.redirect("./home.html");
+      await momentDB.deleteMyOwnFiles({ id: id });
+      res.redirect("./post.html");
     } catch (e) {
       console.log("Error: ", e);
       res.status(401).send({ err: e });
@@ -153,7 +146,6 @@ router.post("/editPost", async (req, res) => {
 router.post("/deletePost", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
-      console.log("The DB ", momentDB);
       const id = req.body.id;
       await momentDB.deleteMyOwnFiles({ id: id });
       res.redirect("./home.html");
