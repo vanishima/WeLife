@@ -150,6 +150,13 @@ function momentDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const credentials = db.collection("credentials");
+      const currentUser = await credentials.findOne({
+        username: credential.username,
+      });
+      // if username not found, return
+      if (currentUser != null) {
+        return "username alreay exists";
+      }
       await credentials.insertOne({
         id: credential.id,
         username: credential.username,

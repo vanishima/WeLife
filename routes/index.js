@@ -67,10 +67,14 @@ router.post("/signup", async (req, res) => {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
     };
-    momentDB.createCredential(newUserData);
-    res.redirect("/signin.html");
+    const insertRes = momentDB.createCredential(newUserData);
+    if (insertRes === "Success") {
+      res.status(200).send();
+    } else {
+      res.status(401).send();
+    }
   } catch (e) {
-    res.redirect("/signup");
+    res.redirect("/signup.html");
   }
 });
 
