@@ -13,11 +13,11 @@
   "devDependencies": {
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
-    "method-override": "^3.0.0",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1"
   },
   "dependencies": {
+    "method-override": "^3.0.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express-flash": "^0.0.2",
