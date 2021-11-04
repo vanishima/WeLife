@@ -131,16 +131,15 @@ router.post("/editPost", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
       console.log("The DB ", momentDB);
-      const title = req.body.title;
+      const id = req.body.id;
       const newContent = {
         content: req.body.content,
       };
-      const post = await momentDB.editMyOwnFiles({
-        title: title,
+      await momentDB.editMyOwnFiles({
+        id: id,
         content: newContent,
       });
-      res.send({ post: post });
-      res.sendStatus(200);
+      res.redirect("./home.html");
     } catch (e) {
       console.log("Error: ", e);
       res.status(401).send({ err: e });
@@ -151,14 +150,13 @@ router.post("/editPost", async (req, res) => {
 });
 
 /* Delete a moment */
-router.delete("/deletePost", async (req, res) => {
+router.post("/deletePost", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
       console.log("The DB ", momentDB);
-      const title = req.body.title;
-      const post = await momentDB.deleteMyOwnFiles({ title: title });
-      res.send({ post: post });
-      res.sendStatus(200);
+      const id = req.body.id;
+      await momentDB.deleteMyOwnFiles({ id: id });
+      res.redirect("./home.html");
     } catch (e) {
       console.log("Error: ", e);
       res.status(401).send({ err: e });

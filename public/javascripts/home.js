@@ -12,11 +12,23 @@ function displayMoments(moments) {
   content.style = "float: left";
   const time = document.createElement("div");
   time.className = "time";
-  const like = document.createElement("a");
-  like.className = "like-btn btn btn-lg";
-  const love = document.createElement("i");
-  love.className = "fa fa-heart";
-  like.appendChild(love);
+  const deleteForm = document.createElement("form");
+  deleteForm.className = "deleteform";
+  deleteForm.action = "/deletePost";
+  deleteForm.method = "POST";
+  deleteForm.style = "";
+  const idInput = document.createElement("input");
+  idInput.type = "hidden";
+  idInput.name = "id";
+  idInput.value = moments.id;
+  const del = document.createElement("button");
+  del.className = "like-btn btn btn-lg";
+  del.type = "submit";
+  const deleteIcon = document.createElement("i");
+  deleteIcon.className = "fa fa-heart love-icon";
+  del.appendChild(deleteIcon);
+  deleteForm.appendChild(idInput);
+  deleteForm.appendChild(del);
   title.innerHTML = moments.title;
   username.innerHTML = "@" + moments.name + ":";
   content.innerHTML = moments.content;
@@ -24,7 +36,7 @@ function displayMoments(moments) {
   mycard.appendChild(username);
   mycard.appendChild(content);
   mycard.appendChild(time);
-  mycard.appendChild(like);
+  mycard.appendChild(del);
   campus.appendChild(mycard);
 }
 
