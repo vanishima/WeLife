@@ -14,6 +14,7 @@ Users can read the website introduction and then **register** a new accout. On t
 ![general_page](https://user-images.githubusercontent.com/51539363/140437699-f43d5b8b-75c6-4921-b784-1f2cd7b14456.png)
 
 ## Tech requirements
+* HTML/CSS/JavaScript
 * bcrypt
 * passport
 * express
