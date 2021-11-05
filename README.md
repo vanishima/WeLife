@@ -32,7 +32,7 @@ or
 * Run npm start or nodemon app.js
 
 ## Reference to the class
-[CS5610]()
+[CS5610](https://johnguerra.co/classes/webDevelopment_fall_2021/)
 
 ## Video Demonstration
 
