@@ -39,6 +39,7 @@ or
 ## Video Demonstration
 
 ## Google Slides
+[slides](https://docs.google.com/presentation/d/1pLbUGlIsU2DRF0bAdil7N2dIWhsOQ82wgUj1Sad0GJM/edit?usp=sharing)
 
 ## MIT License
 [MIT License](https://github.com/SixTRaps/WeLife/blob/main/LICENSE)
