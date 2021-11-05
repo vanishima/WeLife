@@ -1,19 +1,19 @@
 # WeLife
 
-##Author
+## Author
 [Anni Lin](https://github.com/Annie0207)
 [Xuejia Yang](https://github.com/SixTRaps)
 
-##Project Objective
+## Project Objective
 This is a website application for international students to share thier life moments. It consists of 5 parts: website introduction page, authentication(signin/signup/logout), all-posts page (Like), personal home page (Edit and Delete) and post creation page. 
 
 Users can read the website introduction and then **register** a new accout. On the general page, they can view all moment posts shared by other users and **Like** the posts they're touched. On the personal home page, they can view all moments posted by themselves, **edit** and **delete** these posts.
 
-##Screenshot
+## Screenshot
 ![introduction_page](https://user-images.githubusercontent.com/51539363/140437667-06bffb7e-da4b-4cf9-aca0-be217d9a2eda.png)
 ![general_page](https://user-images.githubusercontent.com/51539363/140437699-f43d5b8b-75c6-4921-b784-1f2cd7b14456.png)
 
-##Tech requirements
+## Tech requirements
 * bcrypt
 * passport
 * express
@@ -21,7 +21,7 @@ Users can read the website introduction and then **register** a new accout. On t
 * node
 * AJAX
 
-##How to install/use locally
+## How to install/use locally
 Use the website deployed here: [WeLife Web](https://welife-web-dev.herokuapp.com/)
 
 or
@@ -31,14 +31,14 @@ or
 * Keep your mongodb running
 * Run npm start or nodemon app.js
 
-##Reference to the class
+## Reference to the class
 [CS5610]()
 
-##Video Demonstration
+## Video Demonstration
 
-##Google Slides
+## Google Slides
 
-##MIT License
+## MIT License
 [MIT License](https://github.com/SixTRaps/WeLife/blob/main/LICENSE)
 
-##Release
+## Release
