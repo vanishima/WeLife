@@ -1,7 +1,7 @@
 # WeLife
 
 ## Author
-[Anni Lin](https://github.com/Annie0207)
+[Anni Lin](https://github.com/Annie0207)  
 [Xuejia Yang](https://github.com/SixTRaps)
 
 ## Project Objective
