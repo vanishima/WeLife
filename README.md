@@ -5,7 +5,7 @@
 [Xuejia Yang](https://github.com/SixTRaps)
 
 ## Project Objective
-This is a website application for international students to share thier life moments. It consists of 5 parts: website introduction page, authentication(signin/signup/logout), all-posts page (Like), personal home page (Edit and Delete) and post creation page. 
+This is a website application for international students to share their life moments. It consists of 5 parts: website introduction page, authentication(signin/signup/logout), all-posts page (Like), personal home page (Edit and Delete) and post creation page. 
 
 Users can read the website introduction and then **register** a new accout. On the general page, they can view all moment posts shared by other users and **Like** the posts they're touched. On the personal home page, they can view all moments posted by themselves, **edit** and **delete** these posts.
 
