@@ -37,7 +37,8 @@ h1 {
 }
 
 .scenery-img {
-  padding-left: 130px;
-  height: 650px;
-  width: auto;
+  margin-left: 80px;
+  margin-top: 80px;
+  height: auto;
+  width: 800px;
 }
