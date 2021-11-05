@@ -23,7 +23,7 @@ Users can read the website introduction and then **register** a new accout. On t
 * AJAX
 
 ## How to install/use locally
-Use the website deployed here: 
+Use the website deployed here:   
 **WeLife Web** <https://welife-web-dev.herokuapp.com/>
 
 or
