@@ -24,7 +24,7 @@ Users can read the website introduction and then **register** a new accout. On t
 
 ## How to install/use locally
 Use the website deployed here:   
-**WeLife Web** <https://welife-web-dev.herokuapp.com/>
+**WeLife Web Deployed in Heroku** <https://welife-web-dev.herokuapp.com/>
 
 or
 
@@ -39,7 +39,7 @@ or
 ## Video Demonstration
 
 ## Google Slides
-[slides](https://docs.google.com/presentation/d/1pLbUGlIsU2DRF0bAdil7N2dIWhsOQ82wgUj1Sad0GJM/edit?usp=sharing)
+[Slides](https://docs.google.com/presentation/d/1pLbUGlIsU2DRF0bAdil7N2dIWhsOQ82wgUj1Sad0GJM/edit?usp=sharing)
 
 ## MIT License
 [MIT License](https://github.com/SixTRaps/WeLife/blob/main/LICENSE)
