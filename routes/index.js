@@ -67,7 +67,7 @@ router.post("/signup", async (req, res) => {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
     };
-    const insertRes = momentDB.createCredential(newUserData);
+    const insertRes = await momentDB.createCredential(newUserData);
     if (insertRes === "Success") {
       res.status(200).send();
     } else {
