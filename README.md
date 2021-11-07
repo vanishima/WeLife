@@ -10,7 +10,8 @@ This is a website application for international students to share their life mom
 Users can read the website introduction and then **register** a new accout. On the general page, they can view all moment posts shared by other users and **Like** the posts they're touched. On the personal home page, they can view all moments posted by themselves, **edit** and **delete** these posts.
 
 ## Screenshot
-![introduction_page](https://user-images.githubusercontent.com/51539363/140437667-06bffb7e-da4b-4cf9-aca0-be217d9a2eda.png)
+![introduction_page](https://user-images.githubusercontent.com/51539363/140631243-1ca59811-8da7-47bb-8658-1a37078d0d4b.png)
+
 ![general_page](https://user-images.githubusercontent.com/51539363/140437699-f43d5b8b-75c6-4921-b784-1f2cd7b14456.png)
 
 ## Tech requirements
@@ -37,6 +38,7 @@ or
 [CS5610](https://johnguerra.co/classes/webDevelopment_fall_2021/)
 
 ## Video Demonstration
+[demo vedio](https://youtu.be/RuSrqHEUV-M)
 
 ## Google Slides
 [Slides](https://docs.google.com/presentation/d/1pLbUGlIsU2DRF0bAdil7N2dIWhsOQ82wgUj1Sad0GJM/edit?usp=sharing)
