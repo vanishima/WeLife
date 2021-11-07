@@ -38,7 +38,7 @@ or
 [CS5610](https://johnguerra.co/classes/webDevelopment_fall_2021/)
 
 ## Video Demonstration
-[demo vedio](https://youtu.be/RuSrqHEUV-M)
+[Demo Vedio](https://youtu.be/RuSrqHEUV-M)
 
 ## Google Slides
 [Slides](https://docs.google.com/presentation/d/1pLbUGlIsU2DRF0bAdil7N2dIWhsOQ82wgUj1Sad0GJM/edit?usp=sharing)
@@ -47,3 +47,4 @@ or
 [MIT License](https://github.com/SixTRaps/WeLife/blob/main/LICENSE)
 
 ## Release
+[Release V1.1](https://github.com/SixTRaps/WeLife/releases/tag/v1.1)
