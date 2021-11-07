@@ -61,9 +61,6 @@ function momentDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const now = await db.collection("files").deleteOne({ id: id.id });
-      console.log("the id to be deleted: ", id.id);
-      console.log("the id to be deleted: ", id);
-      console.log("now:", now);
       return now;
     } finally {
       client.close();

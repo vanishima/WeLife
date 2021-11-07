@@ -14,18 +14,23 @@ function displayMoments(moments) {
   deleteForm.className = "deleteform";
   deleteForm.action = "/deletePost";
   deleteForm.method = "POST";
-  const idInput = document.createElement("input");
-  idInput.type = "hidden";
-  idInput.name = "id";
-  idInput.value = moments.id;
+  const idInputForDeletion = document.createElement("input");
+  idInputForDeletion.type = "hidden";
+  idInputForDeletion.name = "id";
+  idInputForDeletion.value = moments.id;
   const del = document.createElement("button");
   del.className = "btn btn-lg";
   del.type = "submit";
   const deleteIcon = document.createElement("i");
   deleteIcon.className = "fa fa-times-circle";
   del.appendChild(deleteIcon);
-  deleteForm.appendChild(idInput);
+  deleteForm.appendChild(idInputForDeletion);
   deleteForm.appendChild(del);
+
+  const idInputForEdit = document.createElement("input");
+  idInputForEdit.type = "hidden";
+  idInputForEdit.name = "id";
+  idInputForEdit.value = moments.id;
 
   const editForm = document.createElement("form");
   editForm.className = "deleteform";
@@ -37,7 +42,7 @@ function displayMoments(moments) {
   const editIcon = document.createElement("i");
   editIcon.className = "fas fa-edit";
   edit.appendChild(editIcon);
-  editForm.appendChild(idInput);
+  editForm.appendChild(idInputForEdit);
   editForm.appendChild(edit);
 
   title.innerHTML = moments.title;
