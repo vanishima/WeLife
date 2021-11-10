@@ -13,6 +13,8 @@ initializePassport(
   (id) => momentDB.findUser({ id: id })
 );
 
+// It may look clearer if you separate the routes into /users, /moments, etc.
+
 /* GET different page. */
 router.get("/", async (req, res) => {
   if (req.isAuthenticated()) res.render("general.html");
@@ -46,6 +48,8 @@ router.get("/getUser", async (req, res) => {
   }
 });
 
+// I like how you direct the user to different pages
+// based on the result of authentication
 // User sign in
 router.post(
   "/signin",
