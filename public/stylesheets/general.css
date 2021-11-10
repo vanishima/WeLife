@@ -38,6 +38,7 @@ body {
   background-color: #ddd;
 }
 
+/* I like how you specified scales of the icons to display in different browsers */
 i {
   padding-top: 10px;
   transform: scale(2, 2);
