@@ -1,6 +1,9 @@
 const userButtons = document.querySelector(".user-buttons");
 const welcome = document.querySelector(".welcome-user");
 
+// you can also keep both buttons in .html file and
+// change the style.display (block or none) of those in JS
+// to hide an element and show another
 async function addButtons() {
   const login = await fetch("/getUser");
 
